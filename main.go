@@ -10,16 +10,13 @@ import (
 
 // Initialize and start the bot
 func main() {
-    envLoader := EnvLoader{}
-    if err := envLoader.LoadEnv(); err != nil {
-        log.Fatal("Error loading .env file")
-    }
-
+    // Get the bot token directly from environment variables
     botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
     if botToken == "" {
-        log.Fatal("Bot token is not set. Please check the .env file.")
+        log.Fatal("Bot token is not set. Please check the environment variables.")
     }
 
+    // Initialize the bot
     botInitializer := BotInitializer{}
     bot, err := botInitializer.InitializeBot(botToken)
     if err != nil {
